@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/Pinto006/svg-logo-generator#readme",
   "dependencies": {
-    "inquirer": "^9.2.7"
+    "inquirer": "^8.2.4"
   }
 }
