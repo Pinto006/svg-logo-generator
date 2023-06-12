@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const {Square, Triangle, Circle}=require('./lib/shapes')
-const generateLogo = require('./lib/generateLogo');
+// const generateLogo = require('./lib/generateLogo');
 const questions = [
     {
         type: 'list',
@@ -19,7 +19,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'backgroundColor',
+        name: 'color',
         message: 'What color would you like the background to be?',
     },
     {
@@ -30,40 +30,43 @@ const questions = [
 
 ]
 
-class Svg{
-    constructor(){
-        this.textElement = ''
-        this.shapeElement = ''
+const init = async () => {
+    try {
+        const response = await inquirer.prompt(questions);
+        let shape;
+        if (response.shape === 'circle') {
+            shape = new Circle();
+            shape.setColor(response.shapesColor);
+        } else if (response.shape === 'square') {
+            shape = new Square();
+            shape.setColor(response.shapesColor);
+        } else if (response.shape === 'triangle') {
+            shape = new Triangle();
+            shape.setColor(response.shapesColor);
+        }
+        console.log('shape', shape);
+        fs.writeFile('logo.svg', shape.render());
+    } catch (err) {
+        console.error(err);
     }
-    render(){
+};
 
-        return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.shapeElement}${this.textElement}</svg>`
-    }
-    setText(text,color){
-        this.textElement = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">${text}</text>`
-    }
-    setShape(shape){
-        this.shapeElement = shape.render()
-
-    }
-    
-}
-
-function writeToFile(fileName, data) {  //fleName, data
-    return inquirer.prompt(questions)
-    .then((answers)=>{
-        const logo = generateLogo(answers)
+init();
+// function writeToFile(fileName, data) {  //fleName, data
+//     return inquirer.prompt(questions)
+//     .then((answers)=>{
+//         const logo = generateLogo(answers)
       
-        fs.writeFile(fileName, data,'./examples/logo.svg', logo, function(err) {
-            if(err) {
-                console.log('Logo not saved', err)
-            } else {
-                console.log('Success!')
-            }
-        })
-    })
-    .catch((error)=>{
-        console.log(error)
-    })
-}
-writeToFile();
+//         fs.writeFile(fileName, data,'./examples/logo.svg', logo, function(err) {
+//             if(err) {
+//                 console.log('Logo not saved', err)
+//             } else {
+//                 console.log('Success!')
+//             }
+//         })
+//     })
+//     .catch((error)=>{
+//         console.log(error)
+//     })
+// }
+// writeToFile();
