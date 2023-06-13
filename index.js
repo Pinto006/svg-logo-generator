@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs/promises');
-const {Square, Triangle, Circle}=require('./lib/shapes')
+const {Square, Triangle, Circle, Shapes}=require('./lib/shapes')
 // const generateLogo = require('./lib/generateLogo');
 const questions = [
     {
@@ -34,23 +34,25 @@ const init = async () => {
     try {
         const response = await inquirer.prompt(questions);
         let shape;
-        let text = text.questions;
         if (response.shape === 'circle') {
             shape = new Circle();
-            shape.setColor(response.color);
-            text.setText(response.text);
-            textColor.setTextColor(response.textColor);
-        } else if (response.shape === 'square') {
+            // shape.setColor(response.color);
+            // shape.setText(response.text)
+            // shape.setTextColor(response.textColor);           
+        } else if(response.shape === 'square') {
             shape = new Square();
-            shape.setColor(response.color);
-            text.setText(response.text);
-            textColor.setTextColor(response.textColor);
-        } else if (response.shape === 'triangle') {
+            // shape.setColor(response.color);
+            // shape.setText(response.text)
+            // shape.setTextColor(response.textColor); 
+        } else {
             shape = new Triangle();
-            shape.setColor(response.color);
-            text.setText(response.text);
-            textColor.setTextColor(response.textColor);
+            // shape.setColor(response.color);
+            // shape.setText(response.text)
+            // shape.setTextColor(response.textColor); 
         }
+        shape.setColor(response.color);
+        shape.setText(response.text)
+        shape.setTextColor(response.textColor);
         console.log('shape', shape);
         console.log(response);
         fs.writeFile('logo.svg', shape.render());
