@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs/promises');
-const {Square, Triangle, Circle, Shapes}=require('./lib/shapes')
-// const generateLogo = require('./lib/generateLogo');
+const {Square, Triangle, Circle,}=require('./lib/shapes')
 const questions = [
     {
         type: 'list',
@@ -29,27 +28,19 @@ const questions = [
     },
 
 ]
-
+//to generate the logo
 const init = async () => {
     try {
         const response = await inquirer.prompt(questions);
         let shape;
         if (response.shape === 'circle') {
-            shape = new Circle();
-            // shape.setColor(response.color);
-            // shape.setText(response.text)
-            // shape.setTextColor(response.textColor);           
+            shape = new Circle();      
         } else if(response.shape === 'square') {
             shape = new Square();
-            // shape.setColor(response.color);
-            // shape.setText(response.text)
-            // shape.setTextColor(response.textColor); 
         } else {
             shape = new Triangle();
-            // shape.setColor(response.color);
-            // shape.setText(response.text)
-            // shape.setTextColor(response.textColor); 
         }
+        //to set the shape color, text and text color 
         shape.setColor(response.color);
         shape.setText(response.text)
         shape.setTextColor(response.textColor);
@@ -62,21 +53,3 @@ const init = async () => {
 };
 
 init();
-// function writeToFile(fileName, data) {  //fleName, data
-//     return inquirer.prompt(questions)
-//     .then((answers)=>{
-//         const logo = generateLogo(answers)
-      
-//         fs.writeFile(fileName, data,'./examples/logo.svg', logo, function(err) {
-//             if(err) {
-//                 console.log('Logo not saved', err)
-//             } else {
-//                 console.log('Success!')
-//             }
-//         })
-//     })
-//     .catch((error)=>{
-//         console.log(error)
-//     })
-// }
-// writeToFile();

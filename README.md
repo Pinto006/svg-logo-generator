@@ -7,9 +7,9 @@ This command line application will generate a simple log in a SVG file for the u
 To use, first be sure to install inquier by typing "npm i inquirer@8.2.4" into the terminal. Once the package.json is installed, type node index.js into the terminal. The prompt questions for your logo generator will begin.
 
 ## Usage
-Screen recording URL: 
+Screen recording URL: https://drive.google.com/file/d/1shleU_kCARmuQMsVp6UKkIi1eqzJS5fR/view
 
-![Alt text](src/images/Screenshot.png)
+![Alt text](images/Screenshot.png)
 
 ## License
 No License
